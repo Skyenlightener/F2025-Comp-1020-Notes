@@ -13,18 +13,23 @@ public class Dancer {
         this.age = age;
         this.skillLevel = skillLevel;
 
-        if(name == null || name.isEmpty()) {
+        boolean isNameInvalid = name == null || name.isEmpty();
+        boolean isAgeInvalid = age < 10 || age > 100;
+        boolean isSkillLevelInvalid = skillLevel < 1 || skillLevel > 10;
+        if(isNameInvalid) {
             System.out.println("Error: Dancer name cannot be null or empty");
             this.name = "Unknown";
         }
-        if (age < 10 || age > 100){
+        if (isAgeInvalid){
             System.out.println("Error: Age must be between 10 and 100");
             this.age = 10;
         }
-        if (skillLevel < 1 || skillLevel > 10){
+        if (isSkillLevelInvalid){
             System.out.println("Error: Skill level must be between 1 and 10");
             this.skillLevel = 1;
         }
+
+        if(isNameInvalid || isNameInvalid || isSkillLevelInvalid) System.out.println("Warning: Default values assigned for invalid inputs.");
 
         closet = new Costume[5];
         events = new Event[3];
@@ -58,6 +63,7 @@ public class Dancer {
                 }
             }
             closet[indexToAddDancer] = costume;
+            numCostumes++;
             return true;
         }
     }
@@ -68,12 +74,13 @@ public class Dancer {
             return false;
         } else {
             int indexToRegisterEvent = 0;
-            for (int i = 0; i < closet.length; i++) {
+            for (int i = 0; i < events.length; i++) {
                 if(events[i] != null){
                     indexToRegisterEvent = i;
                 }
             }
             events[indexToRegisterEvent] = event;
+            numEvents++;
             return true;
         }
     }

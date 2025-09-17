@@ -1,6 +1,7 @@
 public class EventExample {
     public static void main(String[] args) {
 
+        System.out.println();
         // Valid event
         Event event = new Event("West Coast Swing Improv - Adult", 3, true);
         System.out.println(event);
