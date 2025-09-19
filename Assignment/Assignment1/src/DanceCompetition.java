@@ -8,23 +8,7 @@ public class DanceCompetition {
     private Event[] events;
     private int numEvents;
 
-    private DanceCompetition(){}
-    private static DanceCompetition instance = new DanceCompetition();
-    public static DanceCompetition getInstance(){
-        if(instance == null) {
-            instance = new DanceCompetition();
-        }
-        return instance;
-    }
-    DanceCompetition competition = DanceCompetition.getInstance();
-
-
-    public static DanceCompetition resetCompetition() {
-        DanceCompetition.instance = new DanceCompetition();
-        return DanceCompetition.instance;
-    }
-
-    public DanceCompetition(Dancer[] dancers, Costume[] costumes, Event[] events){
+    private DanceCompetition(){
         this.dancers = new Dancer[125];
         numDancers = 0;
         this.costumes = new Costume[60];
@@ -32,9 +16,24 @@ public class DanceCompetition {
         this.events = new Event[25];
         numEvents = 0;
     }
+    private static DanceCompetition instance = new DanceCompetition();
+    public static DanceCompetition getInstance(){
+        if(instance == null) {
+            instance = new DanceCompetition();
+        }
+        return instance;
+    }
+//    DanceCompetition competition = DanceCompetition.getInstance();
+
+
+    public static DanceCompetition resetCompetition() {
+        DanceCompetition.instance = new DanceCompetition();
+        return DanceCompetition.instance;
+    }
+
 
     public boolean addDancer(Dancer dancer){
-        if(dancers != null && dancers.length != 0){
+        if(dancers != null || dancers.length != 0){
             boolean findDancerEmptyIndex = false;
             for (int i = 0; i < dancers.length && !findDancerEmptyIndex; i++) {
                 if(dancers[i] == null){
@@ -51,7 +50,7 @@ public class DanceCompetition {
     }
 
     public boolean addCostume(Costume costume){
-        if(costumes != null && costumes.length != 0){
+        if(costumes != null || costumes.length != 0){
             boolean findCostumeEmptyIndex = false;
             for (int i = 0; i < costumes.length && !findCostumeEmptyIndex; i++) {
                 if(costumes[i] == null){
@@ -68,7 +67,7 @@ public class DanceCompetition {
     }
 
     public boolean addEvent(Event event){
-        if(events != null && events.length != 0){
+        if(events != null || events.length != 0){
             boolean findEventEmptyIndex = false;
             for (int i = 0; i < events.length && !findEventEmptyIndex; i++) {
                 if(events[i] == null){
@@ -85,13 +84,13 @@ public class DanceCompetition {
     }
 
     public Event getRandomEvent() {
-        if (events != null && events.length != 0) {
+        if (events == null && events.length == 0) {
             System.out.println("Error: No events available in the DanceCompetition.");
             return null;
         }
         int registeredEvents = 0;
         boolean findRandomEventIndex = false;
-        for (int i = 0; i < events.length && findRandomEventIndex; i++) {
+        for (int i = 0; i < events.length && !findRandomEventIndex; i++) {
             if(events[i] == null) {
                 registeredEvents = i;
                 findRandomEventIndex = true;
@@ -102,6 +101,7 @@ public class DanceCompetition {
 
     public Dancer[] getDancers(){
         Dancer[] copyDancers = new Dancer[numDancers];
+
         for (int i = 0; i < copyDancers.length; i++) {
             copyDancers[i] = dancers[i];
         }
@@ -110,7 +110,7 @@ public class DanceCompetition {
 
     public Event[] getEvents(){
         Event[] copyEvents = new Event[numEvents];
-        for (int i = 0; i < copyEvents.length; i++) {
+        for (int i = 0; i < copyEvents.length ; i++) {
             copyEvents[i] = events[i];
         }
         return copyEvents;
@@ -118,6 +118,7 @@ public class DanceCompetition {
 
     public Costume[] getCostumes(){
         Costume[] copyCostumes = new Costume[numCostumes];
+
         for (int i = 0; i < copyCostumes.length; i++) {
             copyCostumes[i] = costumes[i];
         }

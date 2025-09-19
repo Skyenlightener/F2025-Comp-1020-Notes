@@ -13,6 +13,7 @@ public class DanceCompetitionExample {
         world.addDancer(dancer3);
         world.addDancer(dancer4);
 
+
         // Add costumes
         Costume costume1 = new Costume("Blue Dress", "A royal blue dress with a knee-length wavy skirt. Blue lyrical shoes. Blue hair accessory.", 75, false);
         Costume costume2 =  new Costume("Purple Jumpsuit", "A full body purple spandex jumpsuit and no shoes.", 125.25, true);
