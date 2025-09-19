@@ -1,6 +1,7 @@
 public class GuestExample {
     public static void main(String[] args) {
         Dancer dancer = new Dancer("Li", 31, 4);
+        System.out.println();
 
         // Valid guest
         Guest guest1 = new Guest("Chris", "Choreographer", true, dancer);
@@ -8,14 +9,16 @@ public class GuestExample {
         // Guest{name='Chris', relationship='Choreographer', allowedBackstage=true, dancer='Li'}
         System.out.println(guest1.giveMotivationalSpeech());
         // Output: The Choreographer says: don't forget to point your toes!"
+        System.out.println();
 
         // Invalid name and access and invalid backstage access
         Guest guest2 = new Guest("", "Family", true, dancer);
         // Output: Error: Guest name cannot be null or empty
-        // Output: Error: Only accreditated choreographers are allowed allowed backstage`
+        // Output: Error: Only accredited choreographers are allowed backstage`
         // Output: Warning: Default values assigned for invalid inputs.
         System.out.println(guest2);
         // Guest{name='Unknown', relationship='Family', allowedBackstage=false, dancer='Li'}
+        System.out.println();
 
         // Invalid relationship and invalid backstage access
         Guest guest3 = new Guest("Gabby", "", true, dancer);
@@ -26,6 +29,7 @@ public class GuestExample {
         // Guest{name='Gabby', relationship='Unknown Relationship Type', allowedBackstage=false, dancer='Li'}
         System.out.println(guest3.giveMotivationalSpeech());
         // Output: Gabby says: my favourite dance is the macarena...
+        System.out.println();
 
         // Null owner
         Guest guest4 = new Guest("Jessica", "Choreographer", true, null);

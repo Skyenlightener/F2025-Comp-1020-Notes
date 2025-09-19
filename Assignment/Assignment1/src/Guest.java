@@ -1,5 +1,3 @@
-import java.sql.SQLOutput;
-
 public class Guest {
 
     private String name;
@@ -13,15 +11,17 @@ public class Guest {
         this.relationship = relationship;
         this.allowedBackstage = allowedBackstage;
         this.dancer = dancer;
+        motivationalWords = giveMotivationalSpeech();
 
+        boolean nameInvalid = (name == null || name.isEmpty());
+        boolean relationshipInvalid = false;
+        boolean dancerInvalid = dancer == null;
 
-        boolean nameInvalid = name == null || name.isEmpty();
         if(nameInvalid){
-            name = "Unknown";
+            this.name = "Unknown";
             System.out.println("Error: Guest name cannot be null or empty");
         }
 
-        boolean relationshipInvalid = false;
         if(relationship == null || relationship.isEmpty()){
             relationshipInvalid = true;
         }
@@ -30,20 +30,19 @@ public class Guest {
         }
 
         if(relationshipInvalid){
-            relationship = "Unknown Relationship Type";
+            this.relationship = "Unknown Relationship Type";
             motivationalWords = "my favourite dance is the macarena...";
             System.out.println("Error: Guest relationship should be Family, Friend, or Choreographer");
-            allowedBackstage = false;
+            this.allowedBackstage = false;
         }
 
         if(relationship.equals("Choreographer")){
-            allowedBackstage = true;
-        }else if(relationship.equals("Friend") || relationship.equals("Family")){
-            allowedBackstage = false;
+            this.allowedBackstage = true;
+        }else{
+            this.allowedBackstage = false;
             System.out.println("Error: Only accredited choreographers are allowed allowed backstage");
         }
 
-        boolean dancerInvalid = dancer == null;
         if(dancerInvalid){
             System.out.println("Error: Guest must be associated with a valid dancer");
             Dancer newDancer = new Dancer("Default Dancer", 100,1);// skilllevel is not provided
@@ -70,24 +69,25 @@ public class Guest {
             return dancer;
         }
 
+
         public String giveMotivationalSpeech(){
-            if(motivationalWords.equals("Family")){
+            if(relationship.equals("Family")){
                 return "The Family says: we love you, honey!";
             }
-            if(motivationalWords.equals("Friend")){
+            if(relationship.equals("Friend")){
                 return "The Friend says: you got this!";
             }
-            if(motivationalWords.equals("Choreographer")){
+            if(relationship.equals("Choreographer")){
                 return "The Choreographer says: don't forget to point your toes!";
             }
-            if(motivationalWords.equals("Unknown Relationshhip Type")) {
+            if(relationship.equals("Unknown Relationship Type")) {
                 return name + "says: my favourite dance is the macarena...";
             }
             return null;
         }
 
         public String toString(){
-            return String.format("Guest{name='%s', relationship='%s', allowedBackstage='%b', dancer='%s'}", name, relationship, allowedBackstage, dancer.getName());
+            return String.format("Guest{name='%s', relationship='%s', allowedBackstage='%b', dancer='%s'}", name, relationship, allowedBackstage, "Default Dancer");
         }
 
 }
